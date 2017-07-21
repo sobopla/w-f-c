@@ -10,18 +10,13 @@ class Guess < ApplicationRecord
     self.card.answer
   end
 
-  # we will be receiving string response
-  # evaluate if answer is true
-  # update correct field on guess object
-  # backend keeps track
-  # return
-  def self.update(guess_id,answer)
-    self
+
+  def self.update_information(guess_id, answer)
+    guess = Guess.find_by_id(guess_id)
+    guess.update_attribute(correct: true) if guess.answer == answer
   end
 
 
 
 end
-
-
 
