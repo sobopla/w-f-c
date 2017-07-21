@@ -4,10 +4,9 @@ class Round < ApplicationRecord
   has_many   :guesses
   has_many   :cards, through: :deck
 
-
-
+  #
   def self.get(user_id,deck_id)
-    round = Round.includes(:cards,:deck,:guesses).find_by(user_id: user_id, deck_id: deck_id).last
+    round = Round.includes(:cards,:deck,:guesses).where(user_id: user_id, deck_id: deck_id).last
     if round.nil? || round.finished
       Round.create({deck_id:deck.id,user_id:user.id,finished:false})
       Round.includes(:cards,:deck,:guesses).find_by(user_id: user_id, deck_id: deck_id).last
@@ -29,6 +28,8 @@ class Round < ApplicationRecord
       end
       x +=1
     end
+    # does this not have to stop in the middle? issue with x, will always be reset to 0 or
+    # guess.correct == true
   end
 
   def finish?
@@ -39,22 +40,13 @@ class Round < ApplicationRecord
     self.finished = true
   end
 
-  def stat
-    hash = {total_guess: guesses,
-    correct_first: 0}
-    return hash
+  def stat # we need to finish
+    guesses = self.guesses.pluck(:attempts).reduce(:+)
+    hash = {total_guesses: guesses, correct_first: 0}
   end
 
   def deck_name
     self.deck.name
   end
-
-  # #first draws looks queries guess table and looks for questions that have no guesses
-  # self.deck.cards.all
-  # self.guesses.count < self.deck.cards.all.count
-  # self.guesses
-  # #second it will query for questions where answer are !correct that only have one guess
-  # #thirdit will query for questions where answer are !correct that only have second guess .....
-  # #exit condition is Query all question with true = card counts
 end
 
