@@ -16,7 +16,7 @@ class Guess < ApplicationRecord
   # backend keeps track
   # return
   def self.update(guess_id,answer)
-
+    self
   end
 
 
