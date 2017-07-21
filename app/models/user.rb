@@ -4,7 +4,7 @@ class User < ApplicationRecord
 
   validates :username, :email, presence:true, uniqueness: true
   validates :password_hash, presence:true
-
+  include BCrypt
   def password
     @password ||= Password.new(password_hash)
   end

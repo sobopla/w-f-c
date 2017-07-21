@@ -1,4 +1,4 @@
 class Deck < ApplicationRecord
   has_many :cards
-  belongs_to :round
+  has_many :rounds
 end
