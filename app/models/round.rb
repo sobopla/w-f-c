@@ -4,7 +4,6 @@ class Round < ApplicationRecord
   has_many   :guesses
   has_many   :cards, through: :deck
 
-  #
   def self.get(user_id,deck_id)
     round = Round.where(user_id: user_id, deck_id: deck_id).last
     if round.nil? || round.finished
@@ -39,14 +38,19 @@ class Round < ApplicationRecord
     self.finished = true
   end
 
-
-  def stat # we need to finish
+  def stat # end of game stat
     guesses = self.guesses.pluck(:attempts).reduce(:+)
     hash = {total_guesses: guesses, correct_first: 0}
   end
 
+
+
   def deck_name
     self.deck.name
   end
+
+
+
+
 end
 

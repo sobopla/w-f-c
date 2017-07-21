@@ -23,8 +23,34 @@ class User < ApplicationRecord
     end
   end
 
-  def self.stat(user_id)
+  # profile page stat
+  # return array with each game as each hash
+  # User.rounds # all the user's rounds
 
+  def profile_stat(user_id)
+    Deck.find_all.where
   end
 
+
 end
+
+
+# [ {deck_name: "Query this",
+#     Round: [ {date: "query date",
+#               card_in_deck: "query total cards",
+#               first_guess_correct: "query",
+#               total_guesses: "query" },
+#               {date: "query date",
+#               card_in_deck: "query total cards",
+#               first_guess_correct: "query",
+#               total_guesses: "query" },
+#             ]
+#   },
+#   {deck_name: "Query this",
+#     Round: [ {date: "query date",
+#               card_in_deck: "query total cards",
+#               first_guess_correct: "query",
+#               total_guesses: "query" },
+#             ]
+#   }
+# ]
