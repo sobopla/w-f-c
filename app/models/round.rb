@@ -6,11 +6,10 @@ class Round < ApplicationRecord
 
   #
   def self.get(user_id,deck_id)
-
-    round = Round.includes(:cards,:deck,:guesses).where(user_id: user_id, deck_id: deck_id).last
+    round = Round.includes(:cards, :deck, :guesses).where(user_id: user_id, deck_id: deck_id).last
     if round.nil? || round.finished
-      Round.create({deck_id:deck.id,user_id:user.id,finished:false})
-      Round.includes(:cards,:deck,:guesses).find_by(user_id: user_id, deck_id: deck_id).last
+      Round.create({deck_id:deck_id, user_id:user_id, finished:false})
+      Round.includes(:cards, :deck, :guesses).find_by(user_id: user_id, deck_id: deck_id).last
     end
   end
 
