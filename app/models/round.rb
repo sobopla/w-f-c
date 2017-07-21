@@ -7,11 +7,28 @@ class Round < ApplicationRecord
 
 
   def self.get(user_id,deck_id)
-    Round.includes(:cards,:deck,:guesses).find_by(user_id: user_id, deck_id: deck_id)
+    round = Round.includes(:cards,:deck,:guesses).find_by(user_id: user_id, deck_id: deck_id).last
+    if round.nil? || round.finished
+      Round.create({deck_id:deck.id,user_id:user.id,finished:false})
+      Round.includes(:cards,:deck,:guesses).find_by(user_id: user_id, deck_id: deck_id).last
+    end
   end
 
   def question  # fix me later
-    self.guesses.first
+    if self.guesses.empty?
+      self.cards.each do |card|
+        Guess.create({round_id:self.id,card_id:card.id,correct:false,attempts:0})
+      end
+    end
+    x = 0
+    while x < 10
+      first_pass = self.guesses.select { |guess| (guess.attempts == x) && (guess.correct == false) }
+      # array guesses that were incorrectly answered from previous round and not yet guessed in this round
+      if !first_pass.empty?
+        return Guess.includes(:card).find_by_id(first_pass.sample.id)
+      end
+      x +=1
+    end
   end
 
   def finish?
@@ -19,11 +36,13 @@ class Round < ApplicationRecord
       next if guess.correct == true
       return false
     end
-    true
+    self.finished = true
   end
 
   def stat
-#  return hash
+    hash = {total_guess: guesses,
+    correct_first: 0}
+    return hash
   end
 
   def deck_name
