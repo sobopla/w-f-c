@@ -28,8 +28,7 @@ class Round < ApplicationRecord
       end
       x +=1
     end
-    # does this not have to stop in the middle? issue with x, will always be reset to 0 or
-    # guess.correct == true
+
   end
 
   def finish?
@@ -39,6 +38,7 @@ class Round < ApplicationRecord
     end
     self.finished = true
   end
+
 
   def stat # we need to finish
     guesses = self.guesses.pluck(:attempts).reduce(:+)

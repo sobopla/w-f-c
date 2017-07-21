@@ -1,0 +1,18 @@
+homepage index ----
+
+<div class ="container">
+<h1>Welcome to our flashcards game</h1>
+<% if current_user %>
+<% @decks.each do |deck| %>
+     <li><a href="<%= "round/#{deck.id}" %>"><%=deck.title %></a></li><br>
+<%end%>
+
+<%else %>
+<ul>
+<li><a href="/register">register</a></li>
+<li><a href="/login">login</a></li>
+</ul>
+</div>
+<%end%>
+
+-------------

@@ -1,0 +1,7 @@
+
+
+<ul>
+<% @decklist.each do |deck| %>
+<li><a href=<%="/round/#{deck.id}"%>> <%= deck.name %> </a></li>
+<% end %>
+</ul>

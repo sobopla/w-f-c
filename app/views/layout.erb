@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- 
+  <!--
     normalize.css removes cross-browser differences in defaults, e.g.,
     differences in how form elements appear between Firefox and IE
     See: http://necolas.github.com/normalize.css/
@@ -18,6 +18,17 @@
   <title></title>
 </head>
 <body>
+ <h1> Welcome Flashcard Game</h1>
+<div class ="container">
+  <header role="banner"
+    <div>
+        <ul class="no-bullets no-margin no-padding right">
+          <%= session_check %>
+          <li class="pipe-separate t-light-green left"><a href="/">home</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
   <%= yield %>
 </body>
 </html>
