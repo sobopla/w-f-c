@@ -1,0 +1,5 @@
+user = User.create({username:"josekim",email:"josekim@cisco.com",password:"1234567890"})
+deck = Deck.create({name:"THE COOL DECK!"})
+card = Card.create({deck_id:deck.id, question: "WHO IS THE FAIREST OF THEM ALL?", answer:"Snow white"})
+round = Round.create({deck_id:deck.id,user_id:user.id,finished:false})
+guess = Guess.create({round_id:round.id,card_id:card.id,correct:false,attempts:0})
