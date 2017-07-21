@@ -3,9 +3,14 @@ get '/login' do
 end
 
 post '/login' do
-@user = User.find_by(email: params[:email])
-  if @user && @user.authenticate(params[:password])
-    session[:user_id] = @user.id
+  # check if filled out username
+  # for testing purposes
+  # if username is present assume logged in.
+  logged_in = true
+
+  # @user = User.authenticate(params[:username],params[:password])
+  if logged_in
+    # session[:user_id] = @user.id
     redirect '/'
   else
     @error = "Invalid entry. Try again."
@@ -13,6 +18,17 @@ post '/login' do
   end
 end
 
+
+# @user = User.authenticate(params[:username],params[:password])
+#   if @user
+#     session[:user_id] = @user.id
+#     redirect '/'
+#   else
+#     @error = "Invalid entry. Try again."
+#     erb :'/login'
+#   end
+# end
+#we will need a logout clickable link
 get '/logout' do
   session.delete(:user_id)
   redirect '/'

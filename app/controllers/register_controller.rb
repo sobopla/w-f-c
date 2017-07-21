@@ -4,10 +4,5 @@ end
 
 post '/register' do
   @user = User.new(params[:user])
-  if @user.valid?
-    redirect '/login'
-  else
-    @errors = @user.errors.full_messages
-    erb :register
-  end
+      redirect '/login'
 end
