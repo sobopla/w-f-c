@@ -10,9 +10,6 @@ class Guess < ApplicationRecord
     self.card.answer
   end
 
-  def self.update(guess_id,answer)
-  end
-
 end
 
 
