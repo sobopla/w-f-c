@@ -135,8 +135,12 @@ end
 
 desc 'Start IRB with application environment loaded'
 task "console" do
-  exec "irb -r./config/environment"
-end
+require 'pry'
+ require 'my_gem'
+ exec "pry -r./config/environment"
+ ARGV.clear
+ Pry.start
+ end
 
 
 # In a production environment like Heroku, RSpec might not

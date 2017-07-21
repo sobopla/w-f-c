@@ -3,6 +3,6 @@ get '/register' do
 end
 
 post '/register' do
-  @user = User.new(params[:user])
+  @user = User.create(params[:user])
       redirect '/login'
 end
