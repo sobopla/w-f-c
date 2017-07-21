@@ -23,4 +23,8 @@ class User < ApplicationRecord
     end
   end
 
+  def self.stat(user_id)
+
+  end
+
 end
