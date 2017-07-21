@@ -10,7 +10,7 @@ class Round < ApplicationRecord
     if round.nil? || round.finished
       Round.create({deck_id:deck_id, user_id:user_id, finished:false})
     end
-     Round.includes(:cards, :deck, :guesses).find_by(user_id: user_id, deck_id: deck_id).last
+    Round.includes(:cards, :deck, :guesses).where(user_id: user_id, deck_id: deck_id).last
   end
 
   def question  # fix me later
