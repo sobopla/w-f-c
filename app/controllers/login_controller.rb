@@ -1,14 +1,16 @@
 get '/login' do
+  redirect to("/") if session[:user_id]
   @decks = ["Deck1", "Deck2"]
   # @decks = deck.list
   erb :login
 end
 
 post '/login' do
+  redirect to("/") if session[:user_id]
  @user = User.authenticate(params[:username],params[:password])
-  if @user
+  if @user != nil
     session[:user_id] = @user.id
-    erb :'/deck/show'
+    redirect ("/")
   else
     @error = "Invalid entry. Try again."
     erb :'/login'
