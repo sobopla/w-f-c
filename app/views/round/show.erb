@@ -1,1 +1,15 @@
 <h1> <%=@guess.question %> </h1>
+
+
+<div class = "container">
+  <form method="post" action="/round/<%=params[:id]%>">
+    <div>
+      <label for="article_name">What is your guess:</label><br>
+      <input id="title" name="@latestguess" type="text" />
+    </div>
+    <div>
+      <input name="commit" type="submit" value="Submit your guess" />   
+    </div>
+  </form>
+  </div>
+
