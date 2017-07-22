@@ -4,12 +4,16 @@ class Round < ApplicationRecord
   has_many   :guesses
   has_many   :cards, through: :deck
 
+# you don't have to be logged in to play so a non user can continue
+
   def self.get(user_id,deck_id)
-    round = Round.where(user_id: user_id, deck_id: deck_id).last
-    if round.nil? || round.finished
-      Round.create({deck_id:deck_id, user_id:user_id, finished:false})
+    if user_id != nil
+      round = Round.where(user_id: user_id, deck_id: deck_id).last
+      if round.nil? || round.finished
+        Round.create({deck_id:deck_id, user_id:user_id, finished:false})
+      end
+        Round.includes(:cards, :deck, :guesses).where(user_id: user_id, deck_id: deck_id).last
     end
-    Round.includes(:cards, :deck, :guesses).where(user_id: user_id, deck_id: deck_id).last
   end
 
   def question  # fix me later
