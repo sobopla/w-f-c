@@ -1,7 +1,11 @@
 
 
 <ul>
+<% if session[:user_id] %>
 <% @decklist.each do |deck| %>
 <li><a href=<%="/round/#{deck.id}"%>> <%= deck.name %> </a></li>
+<% end %>
+<% else %>
+<li> Please log in to see the decks </li>
 <% end %>
 </ul>
